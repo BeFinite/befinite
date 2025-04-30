@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Personal website of BeFinite" />
+    <title>BeFinite.</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #c7b5fc94, #ffffff);
+            line-height: 1.6;
+            color: #333;
+        }
+
+
+
+        .nav-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero {
+            position: relative;
+            background: linear-gradient(to bottom right, #b59cec, #e7ddfd);
+            color: #9800fd;
+            padding: 60px 0;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .icon-set {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+       .floating-icon {
+    position: absolute;
+    font-size: 12px;
+    opacity: 0;
+    color: #cbb7f7;
+    user-select: none;
+    pointer-events: none;
+    top: 100%;
+    transform: translateY(0);
+    transition: opacity 0.2s ease-in;
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) scale(1) rotate(0deg);
+        opacity: 0.2;
+    }
+
+    10% {
+        opacity: 0.3;
+    }
+
+    100% {
+        transform: translateY(-120vh) scale(1.2) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+
+        .logo {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+        }
+
+        .logo img {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .logo-inner {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s;
+            margin: 0 auto;
+            /* <- Add this to center it properly */
+        }
+
+        .logo-inner.animate-flip {
+            animation: flipOnce 1.5s ease forwards;
+        }
+
+        @keyframes flipOnce {
+            0% {
+                transform: rotateX(0deg);
+            }
+
+            45% {
+                transform: rotateX(180deg);
+            }
+
+            55% {
+                transform: rotateX(180deg);
+            }
+
+            100% {
+                transform: rotateX(0deg);
+            }
+        }
+
+
+        .logo-inner:hover {
+            transform: rotateX(180deg);
+        }
+
+        .logo-inner img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            backface-visibility: hidden;
+        }
+
+        .logo-back {
+            transform: rotateX(180deg);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 30px;
+            background-color: #9800fd;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-bar {
+            margin-top: 20px;
+            background-color: #b59cec;
+            padding: 10px 0;
+            position: relative;
+            z-index: 1;
+            border-radius: 10px;
+        }
+
+        .nav-bar ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+
+        .nav-bar ul li {
+            margin: 0 15px;
+        }
+
+        .nav-bar ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .nav-bar ul li a:hover {
+            color: #9800fd;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        h2 {
+            font-size: 3rem;
+            text-align: center;
+            color: #9800fd;
+            margin-bottom: 40px;
+        }
+
+        .Sample-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .Sample {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .Sample h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .Sample video {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        #about .container,
+        #contact .container {
+            text-align: center;
+        }
+
+        #about .container p,
+        #contact .container p {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            text-align: left;
+            max-width: 600px;
+            width: 100%;
+            font-size: 20px;
+        }
+
+        #contact .container p a {
+            display: inline-block;
+            color: rgb(255, 0, 0);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        #contact .container p a:hover {
+            cursor: pointer;
+            color: green;
+        }
+
+        footer {
+            margin-top: 0;
+            text-align: center;
+            padding: 20px 0;
+            background-color: #b59cec;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .nav-bar ul {
+                flex-direction: column;
+            }
+
+            .nav-bar ul li {
+                margin: 10px 0;
+            }
+
+            .cta {
+                font-size: 1rem;
+                padding: 8px 20px;
+            }
+
+            .Sample-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .cta {
+                font-size: 0.9rem;
+                padding: 7px 15px;
+            }
+
+            .logo-inner {
+                width: 150px;
+                height: 150px;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .Sample h3 {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .floating-icon {
+                font-size: 60%;
+            }
+        }
+
+        a.back-to-top {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 5px 20px;
+            background-color: #9800fd;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-radius: 5px;
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body id="top">
+    <section class="hero">
+        <div class="icon-set"></div>
+
+        <div class="logo">
+            <div class="logo-inner">
+                <img class="logo-front" src="logo.png" alt="Logo" />
+                <img class="logo-back" src="logo2.jpg" alt="Logo Back" />
+            </div>
+        </div>
+
+        <div class="container">
+            <h1>Hello, I'm BeFinite.</h1>
+            <p>Video Editor | Designer | VFX Artist</p>
+            <a href="#Samples" class="cta">See My Work</a>
+            <nav class="nav-bar">
+                <ul>
+                    <li><a href="#about">About Me</a></li>
+                    <li><a href="#Samples">Samples</a></li>
+                    <li><a href="#contact">Contact Me</a></li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <p>
+                ⭐ | Video editor<br />
+                ⭐ | Filmmaker<br />
+                ⭐ | 2+ years of experience<br />
+                ⭐ | After Effects and Premiere Pro
+            </p>
+        </div>
+    </section>
+
+    <section id="Samples">
+        <div class="container">
+            <h2>Samples</h2>
+            <div class="Sample-list">
+                <div class="Sample">
+    <h3>Long Videos</h3>
+    <div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; border-radius: 10px; overflow: hidden;">
+        <iframe 
+            src="https://www.youtube.com/embed/osWe_RV2mfE" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen 
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+        </iframe>
+    </div>
+</div>
+                <div class="Sample">
+    <h3>Cool VFX</h3>
+    <div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; border-radius: 10px; overflow: hidden;">
+        <iframe 
+            src="https://www.youtube.com/embed/ZjgG_Db3zuU" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen 
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+        </iframe>
+    </div>
+</div>
+                <div class="Sample">
+    <h3>Animation</h3>
+    <div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; border-radius: 10px; overflow: hidden;">
+        <iframe 
+            src="https://www.youtube.com/embed/GN_bC2latxw" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen 
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+        </iframe>
+    </div>
+</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <p>
+                ⭐ | Send an E-mail at <a href="mailto:befinite63@gmail.com">befinite63@gmail.com</a><br />
+                ⭐ | Send an Instagram Message <a href="https://www.instagram.com/befinite63/">here</a>
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 BeFinite. All Rights Reserved.</p>
+            <a href="#top" class="back-to-top">Top</a>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const symbols = ['✂', '▶', '🎞', '📁', '🎬', '⏺', '⏯', '⏹', '⏪', '⏩', '⌛', '✎'];
+        const iconSet = document.querySelector('.icon-set');
+        const iconCount = 120;
+
+        for (let i = 0; i < iconCount; i++) {
+            const icon = document.createElement('div');
+            icon.className = 'floating-icon';
+            icon.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+            icon.style.left = `${Math.random() * 100}%`;
+            icon.style.fontSize = `${(18 + Math.random() * 16) * 0.9}px`;
+            icon.style.animationDuration = `${10 + Math.random() * 20}s`;
+            icon.style.animationDelay = `${Math.random() * 0.2}s`;
+            iconSet.appendChild(icon);
+
+            // Trigger fade-in
+            requestAnimationFrame(() => {
+                icon.style.opacity = '0.15';
+            });
+        }
+    });
+</script>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const logo = document.querySelector('.logo-inner');
+            logo.classList.add('animate-flip');
+
+            setTimeout(() => {
+                logo.classList.remove('animate-flip');
+            }, 1500); // Match animation duration
+        });
+    </script>
+</body>
+
+</html><!-- > -->
